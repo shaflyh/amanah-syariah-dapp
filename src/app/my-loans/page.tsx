@@ -38,7 +38,7 @@ export default function MyLoansPage() {
   const completedLoans = myLoans.filter((loan) => loan.status === 2);
 
   // Check for overdue payments (simple check - in production would check dates)
-  const hasOverdue = activeLoans.some((loan) => loan.dueDate < BigInt(Date.now() / 1000));
+  const hasOverdue = activeLoans.some((loan) => loan.dueDate < BigInt(Math.floor(Date.now() / 1000)));
 
   return (
     <div className="min-h-screen flex flex-col">
