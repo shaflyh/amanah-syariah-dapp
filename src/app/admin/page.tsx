@@ -5,6 +5,8 @@ import { Header } from "@/components/layout/header";
 import { MintNFTForm } from "@/components/admin/mint-nft-form";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { WithdrawFees } from "@/components/admin/withdraw-fees";
+import { LoanManagement } from "@/components/admin/loan-management";
 
 export default function AdminPage() {
   const { address, isConnected } = useAccount();
@@ -45,14 +47,21 @@ export default function AdminPage() {
         <div className="space-y-6">
           <div>
             <h1 className="text-3xl font-bold">Admin Panel</h1>
-            <p className="text-muted-foreground">Manage collateral NFTs and loans</p>
+            <p className="text-muted-foreground">
+              Manage collateral NFTs, loans, and platform fees
+            </p>
           </div>
 
-          <Tabs defaultValue="mint" className="w-full">
+          <Tabs defaultValue="loans" className="w-full">
             <TabsList>
+              <TabsTrigger value="loans">Manage Loans</TabsTrigger>
               <TabsTrigger value="mint">Mint NFT</TabsTrigger>
-              <TabsTrigger value="loans">Manage Loans (Coming Soon)</TabsTrigger>
+              <TabsTrigger value="fees">Platform Fees</TabsTrigger>
             </TabsList>
+
+            <TabsContent value="loans" className="space-y-6">
+              <LoanManagement />
+            </TabsContent>
 
             <TabsContent value="mint" className="space-y-6">
               <div className="max-w-2xl">
@@ -60,10 +69,10 @@ export default function AdminPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="loans" className="space-y-6">
-              <p className="text-muted-foreground">
-                Loan management features coming in Phase 6B...
-              </p>
+            <TabsContent value="fees" className="space-y-6">
+              <div className="max-w-2xl">
+                <WithdrawFees />
+              </div>
             </TabsContent>
           </Tabs>
         </div>
