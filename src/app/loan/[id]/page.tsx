@@ -93,7 +93,7 @@ export default function LoanDetailsPage({ params }: { params: Promise<{ id: stri
             <div className="lg:col-span-2 space-y-6">
               <LoanOverview loan={loan} />
               <InvestmentsList investments={investments} isLoading={isLoadingInvestments} />
-              <PaymentSchedule loan={loan} />
+              <PaymentSchedule loan={loan} onPaymentSuccess={handleFundingSuccess} />
             </div>
 
             {/* Right Column */}
@@ -105,7 +105,7 @@ export default function LoanDetailsPage({ params }: { params: Promise<{ id: stri
                 isLoading={isLoadingCollateral}
               />
 
-              {/* Fund Loan Button - UPDATED */}
+              {/* Fund Loan Button */}
               {isPending && <FundLoanModal loan={loan} onSuccess={handleFundingSuccess} />}
             </div>
           </div>
