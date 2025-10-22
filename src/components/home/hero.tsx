@@ -11,7 +11,7 @@ import { AnimatedStats } from "@/components/home/animated-stats";
 export default function Hero() {
   return (
     // Set position to relative to act as an anchor for the absolutely positioned image
-    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] 2xl:min-h-[1000px] flex items-center">
+    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center">
       {/* Decorative background grid */}
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
