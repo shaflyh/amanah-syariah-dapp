@@ -66,8 +66,8 @@ export default function Footer() {
           </div>
           <div className="mt-2">
             Kontak:{" "}
-            <a href="mailto:hello@amanah.id" className="underline">
-              hello@amanah.id
+            <a href="mailto:shafly2000@gmail.com" className="underline">
+              shafly2000@gmail.com
             </a>
           </div>
         </div>
