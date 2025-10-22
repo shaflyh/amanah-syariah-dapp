@@ -7,7 +7,7 @@ import copy from "copy-to-clipboard";
 
 export default function SmartContractsCard() {
   const address =
-    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ?? "0x0000000000000000000000000000000000000000";
+    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ?? "0x2e8b2Cf575506675E68D5FEACf3333F8c51c0C9B";
   const etherscan = process.env.NEXT_PUBLIC_ETHERSCAN_PREFIX ?? "https://sepolia.etherscan.io";
   const [copied, setCopied] = useState(false);
 
@@ -35,7 +35,7 @@ export default function SmartContractsCard() {
               </p>
 
               <div className="mt-4 flex items-center gap-3 flex-wrap">
-                <div className="rounded-md bg-card text-card-foreground px-3 py-2 text-sm font-mono select-all border border-border">
+                <div className="rounded-md bg-card text-card-foreground px-3 py-2 text-xs font-mono select-all border border-border">
                   {address}
                 </div>
 
@@ -59,8 +59,8 @@ export default function SmartContractsCard() {
 
             <div className="mt-4 md:mt-0 max-w-sm">
               <p className="text-sm text-muted-foreground">
-                Catatan: saat ini demo berjalan di testnet. Untuk mainnet, lihat dokumentasi &
-                repositori.
+                Catatan: Ini adalah demo dApp di jaringan testnet Sepolia. Jangan kirim aset nyata
+                ke alamat kontrak ini.
               </p>
             </div>
           </CardContent>
