@@ -13,6 +13,8 @@ import {
   getLoanStatusText,
   calculateFundingProgress,
 } from "@/lib/utils";
+import { useCollateralWithMetadata } from "@/hooks/use-collateral";
+import { Building2, Loader2, ImageIcon } from "lucide-react";
 
 interface LoanCardProps {
   loan: Loan;
@@ -20,24 +22,56 @@ interface LoanCardProps {
 
 export function LoanCard({ loan }: LoanCardProps) {
   const fundingProgress = calculateFundingProgress(loan.totalFunded, loan.principal);
-
   const isPending = loan.status === 0;
 
+  // Fetch collateral metadata to get the image
+  const { metadata, isLoading: isLoadingMetadata } = useCollateralWithMetadata(
+    Number(loan.collateralTokenId)
+  );
+
   return (
-    <Card className="hover:shadow-lg transition-shadow">
-      <CardHeader>
-        <div className="flex items-start justify-between">
-          <div>
-            <h3 className="text-xl font-semibold">Pinjaman #{loan.loanId.toString()}</h3>
-            <p className="text-sm text-muted-foreground">
-              NFT Agunan #{loan.collateralTokenId.toString()}
-            </p>
+    <Card className="hover:shadow-xl transition-all duration-300 overflow-hidden group pt-0">
+      {/* Collateral Image Header */}
+      <div className="relative h-48 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 overflow-hidden">
+        {isLoadingMetadata ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
           </div>
-          <Badge className={getLoanStatusColor(loan.status)}>
+        ) : metadata?.image ? (
+          <>
+            <img
+              src={metadata.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")}
+              alt={metadata.name || "Collateral"}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          </>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <ImageIcon className="w-12 h-12 text-muted-foreground opacity-30" />
+          </div>
+        )}
+
+        {/* Status Badge - Floating on Image */}
+        <div className="absolute top-3 right-3">
+          <Badge className={`${getLoanStatusColor(loan.status)} shadow-lg`}>
             {getLoanStatusText(loan.status)}
           </Badge>
         </div>
-      </CardHeader>
+
+        {/* Loan ID & Collateral Type - Bottom Left */}
+        <div className="absolute bottom-3 left-3 text-white">
+          <h3 className="text-lg font-bold drop-shadow-lg">Pinjaman #{loan.loanId.toString()}</h3>
+          {metadata && (
+            <div className="flex items-center gap-1 mt-1">
+              <Building2 className="w-3 h-3" />
+              <p className="text-xs font-medium drop-shadow-lg">
+                {metadata.attributes.type} • NFT #{loan.collateralTokenId.toString()}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
 
       <CardContent className="space-y-4">
         {/* Principal Amount */}
@@ -48,43 +82,47 @@ export function LoanCard({ loan }: LoanCardProps) {
 
         {/* Funding Progress (for PENDING loans) */}
         {isPending && (
-          <div className="space-y-2">
+          <div className="space-y-2 p-3 rounded-lg bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-800">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Progres Pendanaan</span>
-              <span className="font-medium">{fundingProgress.toFixed(0)}%</span>
+              <span className="font-medium text-orange-900 dark:text-orange-100">
+                Progres Pendanaan
+              </span>
+              <span className="font-bold text-orange-700 dark:text-orange-300">
+                {fundingProgress.toFixed(0)}%
+              </span>
             </div>
-            <Progress value={fundingProgress} />
+            <Progress value={fundingProgress} className="h-2" />
             <p className="text-xs text-muted-foreground">
-              {formatWeiToEth(loan.totalFunded)} / {formatWeiToEth(loan.principal)} ETH
+              {formatWeiToEth(loan.totalFunded)} / {formatWeiToEth(loan.principal)} ETH terdanai
             </p>
           </div>
         )}
 
         {/* Loan Details */}
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div>
-            <p className="text-muted-foreground">Tingkat Margin</p>
-            <p className="font-medium">
+        <div className="grid grid-cols-2 gap-3 text-sm">
+          <div className="p-2 rounded bg-muted/50">
+            <p className="text-xs text-muted-foreground">Margin</p>
+            <p className="font-bold">
               {((Number(loan.margin) / Number(loan.principal)) * 100).toFixed(1)}%
             </p>
           </div>
-          <div>
-            <p className="text-muted-foreground">Durasi</p>
-            <p className="font-medium">{loan.duration.toString()} bulan</p>
+          <div className="p-2 rounded bg-muted/50">
+            <p className="text-xs text-muted-foreground">Durasi</p>
+            <p className="font-bold">{loan.duration.toString()} bulan</p>
           </div>
-          <div>
-            <p className="text-muted-foreground">Cicilan Bulanan</p>
-            <p className="font-medium">{formatWeiToEth(loan.monthlyPayment)} ETH</p>
+          <div className="p-2 rounded bg-muted/50">
+            <p className="text-xs text-muted-foreground">Cicilan/bulan</p>
+            <p className="font-bold">{formatWeiToEth(loan.monthlyPayment)} ETH</p>
           </div>
-          <div>
-            <p className="text-muted-foreground">Total Pengembalian</p>
-            <p className="font-medium">{formatWeiToEth(loan.totalRepayment)} ETH</p>
+          <div className="p-2 rounded bg-muted/50">
+            <p className="text-xs text-muted-foreground">Total Return</p>
+            <p className="font-bold">{formatWeiToEth(loan.totalRepayment)} ETH</p>
           </div>
         </div>
       </CardContent>
 
       <CardFooter className="flex gap-2">
-        <Button asChild variant="outline" className="flex-1">
+        <Button asChild variant="outline" className="flex-1" size="lg">
           <Link href={`/loan/${loan.loanId}`}>Lihat Detail</Link>
         </Button>
         {isPending && (

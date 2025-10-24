@@ -78,7 +78,7 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogTrigger asChild>
-        <Button className="w-full py-6 text-md" size="lg">
+        <Button className="w-full" size="lg">
           Danai Pinjaman
         </Button>
       </DialogTrigger>
