@@ -7,6 +7,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { WithdrawFees } from "@/components/admin/withdraw-fees";
 import { LoanManagement } from "@/components/admin/loan-management";
+import { PageHeader } from "@/components/ui/page-header";
 import { HandCoins, Sparkles, Wallet } from "lucide-react";
 
 export default function AdminPage() {
@@ -47,22 +48,11 @@ export default function AdminPage() {
       <main className="flex-1 w-full">
         <div className="container mx-auto px-4 py-8 max-w-7xl">
           <div className="space-y-8">
-            {/* Enhanced Header Section */}
-            <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 p-8 text-white shadow-lg">
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm">
-                    <HandCoins className="w-6 h-6" />
-                  </div>
-                  <h1 className="text-4xl font-bold">Panel Admin</h1>
-                </div>
-                <p className="text-emerald-100 text-lg">
-                  Kelola NFT agunan, pinjaman, dan tarik biaya platform
-                </p>
-              </div>
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
-              <div className="absolute bottom-0 right-20 w-40 h-40 bg-white/10 rounded-full"></div>
-            </div>
+            <PageHeader
+              icon={HandCoins}
+              title="Panel Admin"
+              description="Kelola NFT agunan, pinjaman, dan tarik biaya platform"
+            />
 
             {/* Full Width Tabs */}
             <Tabs defaultValue="loans" className="w-full">
