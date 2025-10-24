@@ -43,15 +43,15 @@ export function WithdrawFees() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Platform Fees</CardTitle>
+        <CardTitle>Biaya Platform</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {showSuccess ? (
           <div className="text-center py-8 space-y-4">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
             <div>
-              <h3 className="text-lg font-semibold">Withdrawal Successful!</h3>
-              <p className="text-sm text-muted-foreground mt-2">Fees transferred to your wallet</p>
+              <h3 className="text-lg font-semibold">Penarikan Berhasil!</h3>
+              <p className="text-sm text-muted-foreground mt-2">Biaya ditransfer ke dompet Anda</p>
             </div>
           </div>
         ) : (
@@ -61,7 +61,7 @@ export function WithdrawFees() {
                 <div className="flex items-center gap-3">
                   <Wallet className="w-8 h-8 text-blue-500" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Available Platform Fees</p>
+                    <p className="text-sm text-muted-foreground">Biaya Platform Tersedia</p>
                     <p className="text-2xl font-bold">{formatWeiToEth(availableFees)} ETH</p>
                   </div>
                 </div>
@@ -72,7 +72,8 @@ export function WithdrawFees() {
               <>
                 <Alert>
                   <AlertDescription>
-                    Platform fee (2%) collected from activated loans. Withdraw to admin wallet.
+                    Biaya platform (2%) dikumpulkan dari pinjaman yang diaktifkan. Tarik ke dompet
+                    admin.
                   </AlertDescription>
                 </Alert>
 
@@ -90,16 +91,16 @@ export function WithdrawFees() {
                   {isPending || isConfirming ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      {isPending ? "Confirm in Wallet..." : "Withdrawing..."}
+                      {isPending ? "Konfirmasi di Dompet..." : "Menarik..."}
                     </>
                   ) : (
-                    `Withdraw ${formatWeiToEth(availableFees)} ETH`
+                    `Tarik ${formatWeiToEth(availableFees)} ETH`
                   )}
                 </Button>
               </>
             ) : (
               <p className="text-sm text-muted-foreground text-center py-4">
-                No fees available to withdraw
+                Tidak ada biaya yang tersedia untuk ditarik
               </p>
             )}
           </>

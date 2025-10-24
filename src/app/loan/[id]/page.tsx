@@ -33,7 +33,7 @@ export default function LoanDetailsPage({ params }: { params: Promise<{ id: stri
         <Header />
         <main className="flex-1 container mx-auto px-4 py-8">
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading loan details...</p>
+            <p className="text-muted-foreground">Memuat detail pinjaman...</p>
           </div>
         </main>
       </div>
@@ -46,9 +46,9 @@ export default function LoanDetailsPage({ params }: { params: Promise<{ id: stri
         <Header />
         <main className="flex-1 container mx-auto px-4 py-8">
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Loan not found</p>
+            <p className="text-muted-foreground">Pinjaman tidak ditemukan</p>
             <Button asChild className="mt-4">
-              <Link href="/marketplace">Back to Marketplace</Link>
+              <Link href="/marketplace">Kembali ke Marketplace</Link>
             </Button>
           </div>
         </main>
@@ -73,15 +73,15 @@ export default function LoanDetailsPage({ params }: { params: Promise<{ id: stri
           <Button variant="ghost" asChild>
             <Link href="/marketplace">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Marketplace
+              Kembali ke Marketplace
             </Link>
           </Button>
 
           {/* Header */}
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-3xl font-bold">Loan #{loan.loanId.toString()}</h1>
-              <p className="text-muted-foreground">Borrower: {formatAddress(loan.borrower)}</p>
+              <h1 className="text-3xl font-bold">Pinjaman #{loan.loanId.toString()}</h1>
+              <p className="text-muted-foreground">Peminjam: {formatAddress(loan.borrower)}</p>
             </div>
             <Badge className={getLoanStatusColor(loan.status)}>
               {getLoanStatusText(loan.status)}

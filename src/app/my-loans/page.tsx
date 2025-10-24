@@ -22,7 +22,7 @@ export default function MyLoansPage() {
         <Header />
         <main className="flex-1 container mx-auto px-4 py-8">
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Please connect your wallet</p>
+            <p className="text-muted-foreground">Silakan hubungkan dompet Anda</p>
           </div>
         </main>
       </div>
@@ -38,7 +38,9 @@ export default function MyLoansPage() {
   const completedLoans = myLoans.filter((loan) => loan.status === 2);
 
   // Check for overdue payments (simple check - in production would check dates)
-  const hasOverdue = activeLoans.some((loan) => loan.dueDate < BigInt(Math.floor(Date.now() / 1000)));
+  const hasOverdue = activeLoans.some(
+    (loan) => loan.dueDate < BigInt(Math.floor(Date.now() / 1000))
+  );
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -46,8 +48,10 @@ export default function MyLoansPage() {
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="space-y-6">
           <div>
-            <h1 className="text-3xl font-bold">My Loans</h1>
-            <p className="text-muted-foreground">Create loan requests and manage your borrowings</p>
+            <h1 className="text-3xl font-bold">Pinjaman Saya</h1>
+            <p className="text-muted-foreground">
+              Buat permintaan pinjaman dan kelola pinjaman Anda
+            </p>
           </div>
 
           {/* Overdue Alert */}
@@ -55,22 +59,25 @@ export default function MyLoansPage() {
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                You have overdue payments! Please make payments immediately to avoid default.
+                Anda memiliki tunggakan pembayaran! Segera lakukan pembayaran untuk menghindari
+                gagal bayar.
               </AlertDescription>
             </Alert>
           )}
 
           <Tabs defaultValue="active" className="w-full">
             <TabsList>
-              <TabsTrigger value="active">Active ({activeLoans.length})</TabsTrigger>
-              <TabsTrigger value="pending">Pending ({pendingLoans.length})</TabsTrigger>
-              <TabsTrigger value="completed">Completed ({completedLoans.length})</TabsTrigger>
-              <TabsTrigger value="create">Create New</TabsTrigger>
+              <TabsTrigger value="active">Aktif ({activeLoans.length})</TabsTrigger>
+              <TabsTrigger value="pending">
+                Terbuka untuk Pendanaan ({pendingLoans.length})
+              </TabsTrigger>
+              <TabsTrigger value="completed">Selesai ({completedLoans.length})</TabsTrigger>
+              <TabsTrigger value="create">Buat Baru</TabsTrigger>
             </TabsList>
 
             <TabsContent value="active" className="space-y-6">
               {isLoadingLoans ? (
-                <p className="text-muted-foreground">Loading loans...</p>
+                <p className="text-muted-foreground">Memuat pinjaman...</p>
               ) : activeLoans.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {activeLoans.map((loan) => (
@@ -79,14 +86,14 @@ export default function MyLoansPage() {
                 </div>
               ) : (
                 <div className="text-center py-12 border-2 border-dashed rounded-lg">
-                  <p className="text-muted-foreground">No active loans</p>
+                  <p className="text-muted-foreground">Tidak ada pinjaman aktif</p>
                 </div>
               )}
             </TabsContent>
 
             <TabsContent value="pending" className="space-y-6">
               {isLoadingLoans ? (
-                <p className="text-muted-foreground">Loading loans...</p>
+                <p className="text-muted-foreground">Memuat pinjaman...</p>
               ) : pendingLoans.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {pendingLoans.map((loan) => (
@@ -95,14 +102,16 @@ export default function MyLoansPage() {
                 </div>
               ) : (
                 <div className="text-center py-12 border-2 border-dashed rounded-lg">
-                  <p className="text-muted-foreground">No pending loans waiting for funding</p>
+                  <p className="text-muted-foreground">
+                    Tidak ada pinjaman yang menunggu pendanaan
+                  </p>
                 </div>
               )}
             </TabsContent>
 
             <TabsContent value="completed" className="space-y-6">
               {isLoadingLoans ? (
-                <p className="text-muted-foreground">Loading loans...</p>
+                <p className="text-muted-foreground">Memuat pinjaman...</p>
               ) : completedLoans.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {completedLoans.map((loan) => (
@@ -111,14 +120,14 @@ export default function MyLoansPage() {
                 </div>
               ) : (
                 <div className="text-center py-12 border-2 border-dashed rounded-lg">
-                  <p className="text-muted-foreground">No completed loans yet</p>
+                  <p className="text-muted-foreground">Belum ada pinjaman yang selesai</p>
                 </div>
               )}
             </TabsContent>
 
             <TabsContent value="create" className="space-y-6">
               {isLoadingNFTs ? (
-                <p className="text-muted-foreground">Loading your NFTs...</p>
+                <p className="text-muted-foreground">Memuat NFT Anda...</p>
               ) : (
                 <div className="max-w-2xl">
                   <CreateLoanForm availableNFTs={userNFTs || []} />

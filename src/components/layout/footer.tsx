@@ -23,12 +23,12 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/my-loans" className="hover:underline">
-                    My Loans
+                    Pinjaman Saya
                   </Link>
                 </li>
                 <li>
                   <Link href="/my-investments" className="hover:underline">
-                    My Investments
+                    Investasiku
                   </Link>
                 </li>
               </ul>
@@ -44,12 +44,12 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/privacy" className="hover:underline">
-                    Privacy Policy
+                    Kebijakan Privasi
                   </Link>
                 </li>
                 <li>
                   <Link href="/terms" className="hover:underline">
-                    Terms of Service
+                    Syarat Layanan
                   </Link>
                 </li>
               </ul>

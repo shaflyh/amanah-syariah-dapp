@@ -11,16 +11,16 @@ export function LoanOverview({ loan }: { loan: Loan }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Loan Overview</CardTitle>
+        <CardTitle>Ringkasan Pinjaman</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-sm text-muted-foreground">Principal</p>
+            <p className="text-sm text-muted-foreground">Pokok Pinjaman</p>
             <p className="text-2xl font-bold">{formatWeiToEth(loan.principal)} ETH</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Total Repayment</p>
+            <p className="text-sm text-muted-foreground">Total Pengembalian</p>
             <p className="text-2xl font-bold">{formatWeiToEth(loan.totalRepayment)} ETH</p>
           </div>
           <div>
@@ -31,15 +31,15 @@ export function LoanOverview({ loan }: { loan: Loan }) {
             </p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Duration</p>
-            <p className="text-lg font-semibold">{loan.duration.toString()} months</p>
+            <p className="text-sm text-muted-foreground">Durasi</p>
+            <p className="text-lg font-semibold">{loan.duration.toString()} bulan</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Monthly Payment</p>
+            <p className="text-sm text-muted-foreground">Cicilan Bulanan</p>
             <p className="text-lg font-semibold">{formatWeiToEth(loan.monthlyPayment)} ETH</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Payments Remaining</p>
+            <p className="text-sm text-muted-foreground">Cicilan Tersisa</p>
             <p className="text-lg font-semibold">
               {loan.paymentsRemaining.toString()} / {loan.duration.toString()}
             </p>
@@ -50,12 +50,12 @@ export function LoanOverview({ loan }: { loan: Loan }) {
         {isPending && (
           <div className="space-y-2 pt-4 border-t">
             <div className="flex justify-between text-sm">
-              <span className="font-medium">Funding Progress</span>
+              <span className="font-medium">Progres Pendanaan</span>
               <span className="font-medium">{fundingProgress.toFixed(1)}%</span>
             </div>
             <Progress value={fundingProgress} />
             <p className="text-sm text-muted-foreground">
-              {formatWeiToEth(loan.totalFunded)} / {formatWeiToEth(loan.principal)} ETH funded
+              {formatWeiToEth(loan.totalFunded)} / {formatWeiToEth(loan.principal)} ETH terdanai
             </p>
           </div>
         )}
@@ -63,18 +63,18 @@ export function LoanOverview({ loan }: { loan: Loan }) {
         {/* Dates */}
         <div className="grid grid-cols-3 gap-4 pt-4 border-t text-sm">
           <div>
-            <p className="text-muted-foreground">Created</p>
+            <p className="text-muted-foreground">Dibuat</p>
             <p className="font-medium">{formatDate(loan.createdAt)}</p>
           </div>
           {loan.fundedAt > 0n && (
             <div>
-              <p className="text-muted-foreground">Funded</p>
+              <p className="text-muted-foreground">Terdanai</p>
               <p className="font-medium">{formatDate(loan.fundedAt)}</p>
             </div>
           )}
           {loan.dueDate > 0n && isActive && (
             <div>
-              <p className="text-muted-foreground">Next Payment Due</p>
+              <p className="text-muted-foreground">Jatuh Tempo Berikutnya</p>
               <p className="font-medium">{formatDate(loan.dueDate)}</p>
             </div>
           )}

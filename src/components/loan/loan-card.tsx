@@ -28,9 +28,9 @@ export function LoanCard({ loan }: LoanCardProps) {
       <CardHeader>
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-xl font-semibold">Loan #{loan.loanId.toString()}</h3>
+            <h3 className="text-xl font-semibold">Pinjaman #{loan.loanId.toString()}</h3>
             <p className="text-sm text-muted-foreground">
-              Collateral NFT #{loan.collateralTokenId.toString()}
+              NFT Agunan #{loan.collateralTokenId.toString()}
             </p>
           </div>
           <Badge className={getLoanStatusColor(loan.status)}>
@@ -42,7 +42,7 @@ export function LoanCard({ loan }: LoanCardProps) {
       <CardContent className="space-y-4">
         {/* Principal Amount */}
         <div>
-          <p className="text-sm text-muted-foreground">Principal</p>
+          <p className="text-sm text-muted-foreground">Pokok Pinjaman</p>
           <p className="text-2xl font-bold">{formatWeiToEth(loan.principal)} ETH</p>
         </div>
 
@@ -50,7 +50,7 @@ export function LoanCard({ loan }: LoanCardProps) {
         {isPending && (
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Funding Progress</span>
+              <span className="text-muted-foreground">Progres Pendanaan</span>
               <span className="font-medium">{fundingProgress.toFixed(0)}%</span>
             </div>
             <Progress value={fundingProgress} />
@@ -63,21 +63,21 @@ export function LoanCard({ loan }: LoanCardProps) {
         {/* Loan Details */}
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="text-muted-foreground">Margin Rate</p>
+            <p className="text-muted-foreground">Tingkat Margin</p>
             <p className="font-medium">
               {((Number(loan.margin) / Number(loan.principal)) * 100).toFixed(1)}%
             </p>
           </div>
           <div>
-            <p className="text-muted-foreground">Duration</p>
-            <p className="font-medium">{loan.duration.toString()} months</p>
+            <p className="text-muted-foreground">Durasi</p>
+            <p className="font-medium">{loan.duration.toString()} bulan</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Monthly Payment</p>
+            <p className="text-muted-foreground">Cicilan Bulanan</p>
             <p className="font-medium">{formatWeiToEth(loan.monthlyPayment)} ETH</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Total Return</p>
+            <p className="text-muted-foreground">Total Pengembalian</p>
             <p className="font-medium">{formatWeiToEth(loan.totalRepayment)} ETH</p>
           </div>
         </div>
@@ -85,7 +85,7 @@ export function LoanCard({ loan }: LoanCardProps) {
 
       <CardFooter className="flex gap-2">
         <Button asChild variant="outline" className="flex-1">
-          <Link href={`/loan/${loan.loanId}`}>View Details</Link>
+          <Link href={`/loan/${loan.loanId}`}>Lihat Detail</Link>
         </Button>
         {isPending && (
           <div className="flex-1">

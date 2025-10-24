@@ -44,9 +44,9 @@ export function InvestmentCard({ loan, userAddress }: InvestmentCardProps) {
       <CardHeader>
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-xl font-semibold">Loan #{loan.loanId.toString()}</h3>
+            <h3 className="text-xl font-semibold">Pinjaman #{loan.loanId.toString()}</h3>
             <p className="text-sm text-muted-foreground">
-              Your share: {(myShare * 100).toFixed(2)}%
+              Bagian Anda: {(myShare * 100).toFixed(2)}%
             </p>
           </div>
           <Badge className={getLoanStatusColor(loan.status)}>
@@ -58,26 +58,26 @@ export function InvestmentCard({ loan, userAddress }: InvestmentCardProps) {
       <CardContent className="space-y-4">
         {/* Investment Amount */}
         <div>
-          <p className="text-sm text-muted-foreground">Your Investment</p>
+          <p className="text-sm text-muted-foreground">Investasi Anda</p>
           <p className="text-2xl font-bold">{formatWeiToEth(myInvestment.amount)} ETH</p>
         </div>
 
         {/* Returns */}
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="text-muted-foreground">Expected Return</p>
+            <p className="text-muted-foreground">Imbal Hasil Diharapkan</p>
             <p className="font-medium text-green-600">{formatWeiToEth(expectedReturn)} ETH</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Profit</p>
+            <p className="text-muted-foreground">Keuntungan</p>
             <p className="font-medium text-green-600">+{formatWeiToEth(profit)} ETH</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Received So Far</p>
+            <p className="text-muted-foreground">Diterima Sejauh Ini</p>
             <p className="font-medium">{formatWeiToEth(received)} ETH</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Remaining</p>
+            <p className="text-muted-foreground">Tersisa</p>
             <p className="font-medium">{formatWeiToEth(remaining)} ETH</p>
           </div>
         </div>
@@ -86,7 +86,7 @@ export function InvestmentCard({ loan, userAddress }: InvestmentCardProps) {
         {isActive && (
           <div className="pt-2 border-t">
             <div className="flex justify-between text-sm mb-1">
-              <span className="text-muted-foreground">Payment Progress</span>
+              <span className="text-muted-foreground">Progres Pembayaran</span>
               <span className="font-medium">
                 {Number(loan.duration) - Number(loan.paymentsRemaining)} /{" "}
                 {loan.duration.toString()}
@@ -110,7 +110,7 @@ export function InvestmentCard({ loan, userAddress }: InvestmentCardProps) {
         {isCompleted && (
           <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
             <p className="text-sm text-green-800 font-medium">
-              ✓ Loan completed! You received {formatWeiToEth(expectedReturn)} ETH
+              ✓ Pinjaman selesai! Anda menerima {formatWeiToEth(expectedReturn)} ETH
             </p>
           </div>
         )}
@@ -118,7 +118,7 @@ export function InvestmentCard({ loan, userAddress }: InvestmentCardProps) {
 
       <CardFooter>
         <Button asChild variant="outline" className="w-full">
-          <Link href={`/loan/${loan.loanId}`}>View Loan Details</Link>
+          <Link href={`/loan/${loan.loanId}`}>Lihat Detail Pinjaman</Link>
         </Button>
       </CardFooter>
     </Card>

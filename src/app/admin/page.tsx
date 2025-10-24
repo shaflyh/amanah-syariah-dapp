@@ -18,7 +18,7 @@ export default function AdminPage() {
         <Header />
         <main className="flex-1 container mx-auto px-4 py-8">
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Please connect your wallet</p>
+            <p className="text-muted-foreground">Silakan hubungkan dompet Anda</p>
           </div>
         </main>
       </div>
@@ -32,7 +32,7 @@ export default function AdminPage() {
         <main className="flex-1 container mx-auto px-4 py-8">
           <Alert variant="destructive">
             <AlertDescription>
-              You are not authorized to access this page. Admin access only.
+              Anda tidak memiliki otorisasi untuk mengakses halaman ini. Hanya untuk admin.
             </AlertDescription>
           </Alert>
         </main>
@@ -46,17 +46,15 @@ export default function AdminPage() {
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="space-y-6">
           <div>
-            <h1 className="text-3xl font-bold">Admin Panel</h1>
-            <p className="text-muted-foreground">
-              Manage collateral NFTs, loans, and platform fees
-            </p>
+            <h1 className="text-3xl font-bold">Panel Admin</h1>
+            <p className="text-muted-foreground">Kelola NFT agunan, pinjaman, dan biaya platform</p>
           </div>
 
           <Tabs defaultValue="loans" className="w-full">
             <TabsList>
-              <TabsTrigger value="loans">Manage Loans</TabsTrigger>
+              <TabsTrigger value="loans">Kelola Pinjaman</TabsTrigger>
               <TabsTrigger value="mint">Mint NFT</TabsTrigger>
-              <TabsTrigger value="fees">Platform Fees</TabsTrigger>
+              <TabsTrigger value="fees">Biaya Platform</TabsTrigger>
             </TabsList>
 
             <TabsContent value="loans" className="space-y-6">

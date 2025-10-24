@@ -53,7 +53,7 @@ export function CreateLoanForm({ availableNFTs }: CreateLoanFormProps) {
     e.preventDefault();
 
     if (!selectedNFT || !principal || !marginRate || !duration) {
-      alert("Please fill all fields");
+      alert("Silakan isi semua field");
       return;
     }
 
@@ -74,7 +74,7 @@ export function CreateLoanForm({ availableNFTs }: CreateLoanFormProps) {
     return (
       <Alert>
         <AlertDescription>
-          You don't have any unlocked NFTs. Please get your collateral verified by admin first.
+          Anda tidak memiliki NFT yang terbuka. Silakan verifikasi agunan Anda oleh admin terlebih dahulu.
         </AlertDescription>
       </Alert>
     );
@@ -88,11 +88,11 @@ export function CreateLoanForm({ availableNFTs }: CreateLoanFormProps) {
             <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
               ✓
             </div>
-            <h3 className="text-lg font-semibold">Loan Created Successfully!</h3>
+            <h3 className="text-lg font-semibold">Pinjaman Berhasil Dibuat!</h3>
             <p className="text-sm text-muted-foreground">
-              Your loan request is now live in the marketplace.
+              Permintaan pinjaman Anda sekarang tersedia di marketplace.
             </p>
-            <Button onClick={() => window.location.reload()}>Create Another</Button>
+            <Button onClick={() => window.location.reload()}>Buat Lagi</Button>
           </div>
         </CardContent>
       </Card>
@@ -103,15 +103,15 @@ export function CreateLoanForm({ availableNFTs }: CreateLoanFormProps) {
     <form onSubmit={handleSubmit}>
       <Card>
         <CardHeader>
-          <CardTitle>Create Loan Request</CardTitle>
+          <CardTitle>Buat Permintaan Pinjaman</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Select NFT */}
           <div className="space-y-2">
-            <Label>Collateral NFT</Label>
+            <Label>NFT Agunan</Label>
             <Select value={selectedNFT} onValueChange={setSelectedNFT}>
               <SelectTrigger>
-                <SelectValue placeholder="Select your NFT" />
+                <SelectValue placeholder="Pilih NFT Anda" />
               </SelectTrigger>
               <SelectContent>
                 {unlockedNFTs.map((nft) => (
@@ -125,11 +125,11 @@ export function CreateLoanForm({ availableNFTs }: CreateLoanFormProps) {
 
           {/* Principal */}
           <div className="space-y-2">
-            <Label>Principal Amount (ETH)</Label>
+            <Label>Jumlah Pokok Pinjaman (ETH)</Label>
             <Input
               type="number"
               step="0.01"
-              placeholder="e.g., 50"
+              placeholder="contoh: 50"
               value={principal}
               onChange={(e) => setPrincipal(e.target.value)}
             />
@@ -137,41 +137,41 @@ export function CreateLoanForm({ availableNFTs }: CreateLoanFormProps) {
 
           {/* Margin Rate */}
           <div className="space-y-2">
-            <Label>Annual Margin Rate (%)</Label>
+            <Label>Tingkat Margin Tahunan (%)</Label>
             <Input
               type="number"
               step="0.1"
-              placeholder="e.g., 15"
+              placeholder="contoh: 15"
               value={marginRate}
               onChange={(e) => setMarginRate(e.target.value)}
               max="30"
             />
-            <p className="text-xs text-muted-foreground">Maximum 30% per year</p>
+            <p className="text-xs text-muted-foreground">Maksimum 30% per tahun</p>
           </div>
 
           {/* Duration */}
           <div className="space-y-2">
-            <Label>Duration (months)</Label>
+            <Label>Durasi (bulan)</Label>
             <Input
               type="number"
-              placeholder="e.g., 12"
+              placeholder="contoh: 12"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
               max="60"
             />
-            <p className="text-xs text-muted-foreground">Maximum 60 months</p>
+            <p className="text-xs text-muted-foreground">Maksimum 60 bulan</p>
           </div>
 
           {/* Preview */}
           {principal && marginRate && duration && (
             <div className="p-4 bg-muted rounded-lg space-y-2">
-              <h4 className="font-semibold">Loan Preview</h4>
+              <h4 className="font-semibold">Pratinjau Pinjaman</h4>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <span className="text-muted-foreground">Margin:</span>
                 <span className="font-medium">{formatWeiToEth(margin)} ETH</span>
-                <span className="text-muted-foreground">Total Repayment:</span>
+                <span className="text-muted-foreground">Total Pengembalian:</span>
                 <span className="font-medium">{formatWeiToEth(totalRepayment)} ETH</span>
-                <span className="text-muted-foreground">Monthly Payment:</span>
+                <span className="text-muted-foreground">Cicilan Bulanan:</span>
                 <span className="font-medium">{formatWeiToEth(monthlyPayment)} ETH</span>
               </div>
             </div>
@@ -193,10 +193,10 @@ export function CreateLoanForm({ availableNFTs }: CreateLoanFormProps) {
             {isPending || isConfirming ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {isPending ? "Confirm in Wallet..." : "Creating Loan..."}
+                {isPending ? "Konfirmasi di Dompet..." : "Membuat Pinjaman..."}
               </>
             ) : (
-              "Create Loan Request"
+              "Buat Permintaan Pinjaman"
             )}
           </Button>
         </CardContent>

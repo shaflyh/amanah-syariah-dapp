@@ -18,11 +18,11 @@ export function InvestmentsList({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Investors ({investments?.length || 0})</CardTitle>
+        <CardTitle>Investor ({investments?.length || 0})</CardTitle>
       </CardHeader>
       <CardContent>
         {isLoading ? (
-          <p className="text-sm text-muted-foreground">Loading investments...</p>
+          <p className="text-sm text-muted-foreground">Memuat investasi...</p>
         ) : investments && investments.length > 0 ? (
           <div className="space-y-3">
             {investments.map((investment: any, index: number) => (
@@ -40,7 +40,7 @@ export function InvestmentsList({
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">No investments yet</p>
+          <p className="text-sm text-muted-foreground">Belum ada investasi</p>
         )}
       </CardContent>
     </Card>

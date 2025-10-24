@@ -41,7 +41,7 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
 
   const handleFund = async () => {
     if (!amount || wouldExceed) {
-      alert("Please enter a valid amount");
+      alert("Silakan masukkan jumlah yang valid");
       return;
     }
 
@@ -79,14 +79,14 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogTrigger asChild>
         <Button className="w-full" size="lg">
-          Fund This Loan
+          Danai Pinjaman Ini
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Fund Loan #{loan.loanId.toString()}</DialogTitle>
+          <DialogTitle>Danai Pinjaman #{loan.loanId.toString()}</DialogTitle>
           <DialogDescription>
-            Invest in this loan and earn returns from monthly payments
+            Investasikan dana pada pinjaman ini dan dapatkan imbal hasil dari cicilan bulanan
           </DialogDescription>
         </DialogHeader>
 
@@ -95,19 +95,19 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
             {/* Loan Info */}
             <div className="p-4 bg-muted rounded-lg space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Principal:</span>
+                <span className="text-muted-foreground">Pokok Pinjaman:</span>
                 <span className="font-medium">{formatWeiToEth(loan.principal)} ETH</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Already Funded:</span>
+                <span className="text-muted-foreground">Sudah Terdanai:</span>
                 <span className="font-medium">{formatWeiToEth(loan.totalFunded)} ETH</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Remaining:</span>
+                <span className="text-muted-foreground">Tersisa:</span>
                 <span className="font-medium">{formatWeiToEth(remainingToFund)} ETH</span>
               </div>
               <div className="flex justify-between text-sm pt-2 border-t">
-                <span className="text-muted-foreground">Expected Return:</span>
+                <span className="text-muted-foreground">Imbal Hasil Diharapkan:</span>
                 <span className="font-medium text-green-600">
                   {formatWeiToEth(loan.totalRepayment)} ETH (
                   {((Number(loan.margin) / Number(loan.principal)) * 100).toFixed(1)}% margin)
@@ -117,7 +117,7 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
 
             {/* Amount Input */}
             <div className="space-y-2">
-              <Label>Amount to Fund (ETH)</Label>
+              <Label>Jumlah Pendanaan (ETH)</Label>
               <div className="flex gap-2">
                 <Input
                   type="number"
@@ -133,32 +133,34 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
                   onClick={handleMaxClick}
                   disabled={isPending || isConfirming}
                 >
-                  Max
+                  Maks
                 </Button>
               </div>
               {wouldExceed && (
-                <p className="text-xs text-red-500">Amount exceeds remaining funding needed</p>
+                <p className="text-xs text-red-500">
+                  Jumlah melebihi sisa pendanaan yang dibutuhkan
+                </p>
               )}
             </div>
 
             {/* Your Share Preview */}
             {amount && !wouldExceed && (
               <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg space-y-2">
-                <p className="text-sm font-medium text-blue-900">Your Investment Preview</p>
+                <p className="text-sm font-medium text-blue-900">Pratinjau Investasi Anda</p>
                 <div className="flex justify-between text-sm">
-                  <span className="text-blue-700">Your Share:</span>
+                  <span className="text-blue-700">Bagian Anda:</span>
                   <span className="font-medium text-blue-900">
                     {((amountWei * 10000n) / loan.principal / 100n).toString()}%
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-blue-700">Expected Return:</span>
+                  <span className="text-blue-700">Imbal Hasil Diharapkan:</span>
                   <span className="font-medium text-blue-900">
                     {formatWeiToEth((amountWei * loan.totalRepayment) / loan.principal)} ETH
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-blue-700">Profit:</span>
+                  <span className="text-blue-700">Keuntungan:</span>
                   <span className="font-medium text-green-600">
                     +
                     {formatWeiToEth((amountWei * loan.totalRepayment) / loan.principal - amountWei)}{" "}
@@ -173,7 +175,7 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
               <Alert variant="destructive">
                 <AlertDescription>
                   {error.message.includes("insufficient")
-                    ? "Insufficient ETH balance"
+                    ? "Saldo ETH tidak mencukupi"
                     : error.message}
                 </AlertDescription>
               </Alert>
@@ -187,7 +189,7 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
                 disabled={isPending || isConfirming}
                 className="flex-1"
               >
-                Cancel
+                Batal
               </Button>
               <Button
                 onClick={handleFund}
@@ -197,10 +199,10 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
                 {isPending || isConfirming ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {isPending ? "Confirm in Wallet..." : "Funding..."}
+                    {isPending ? "Konfirmasi di Dompet..." : "Mendanai..."}
                   </>
                 ) : (
-                  `Fund ${amount || "0"} ETH`
+                  `Danai ${amount || "0"} ETH`
                 )}
               </Button>
             </div>
@@ -209,9 +211,9 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
           <div className="py-8 text-center space-y-4">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
             <div>
-              <h3 className="text-lg font-semibold">Funding Successful!</h3>
+              <h3 className="text-lg font-semibold">Pendanaan Berhasil!</h3>
               <p className="text-sm text-muted-foreground mt-2">
-                You've successfully funded {amount} ETH
+                Anda telah berhasil mendanai {amount} ETH
               </p>
             </div>
             <a
@@ -220,10 +222,10 @@ export function FundLoanModal({ loan, onSuccess }: FundLoanModalProps) {
               rel="noopener noreferrer"
               className="text-sm text-blue-500 hover:underline block"
             >
-              View on Etherscan
+              Lihat di Etherscan
             </a>
             <Button onClick={() => handleClose(false)} className="mt-4">
-              Close
+              Tutup
             </Button>
           </div>
         )}

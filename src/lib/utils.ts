@@ -39,13 +39,13 @@ export function getLoanStatusColor(status: number) {
  */
 export function getLoanStatusText(status: number): string {
   const texts = {
-    0: "Pending",
-    1: "Active",
-    2: "Completed",
-    3: "Defaulted",
-    4: "Cancelled",
+    0: "Terbuka untuk Pendanaan",
+    1: "Aktif",
+    2: "Selesai",
+    3: "Gagal Bayar",
+    4: "Dibatalkan",
   };
-  return texts[status as keyof typeof texts] || "Unknown";
+  return texts[status as keyof typeof texts] || "Tidak Diketahui";
 }
 
 /**
@@ -62,7 +62,7 @@ export function calculateFundingProgress(totalFunded: bigint, principal: bigint)
 export function formatDate(timestamp: bigint): string {
   if (timestamp === 0n) return "N/A";
   const date = new Date(Number(timestamp) * 1000);
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("id-ID", {
     year: "numeric",
     month: "short",
     day: "numeric",

@@ -140,10 +140,10 @@ export function MintNFTForm() {
         <CardContent className="pt-6">
           <div className="text-center space-y-4">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
-            <h3 className="text-xl font-semibold">NFT Minted Successfully!</h3>
+            <h3 className="text-xl font-semibold">NFT Berhasil Di-mint!</h3>
             <div className="space-y-2 text-sm">
               <p className="text-muted-foreground">
-                Recipient: {recipientAddress.slice(0, 6)}...{recipientAddress.slice(-4)}
+                Penerima: {recipientAddress.slice(0, 6)}...{recipientAddress.slice(-4)}
               </p>
               <p className="text-muted-foreground">Metadata: {metadataURI}</p>
               <a
@@ -152,11 +152,11 @@ export function MintNFTForm() {
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:underline block"
               >
-                View on Etherscan
+                Lihat di Etherscan
               </a>
             </div>
             <Button onClick={handleReset} className="mt-4">
-              Mint Another NFT
+              Mint NFT Lain
             </Button>
           </div>
         </CardContent>
@@ -168,12 +168,12 @@ export function MintNFTForm() {
     <form onSubmit={handleSubmit}>
       <Card>
         <CardHeader>
-          <CardTitle>Mint Collateral NFT</CardTitle>
+          <CardTitle>Mint NFT Agunan</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Recipient Address */}
           <div className="space-y-2">
-            <Label>Recipient Address (Borrower Wallet) *</Label>
+            <Label>Alamat Penerima (Dompet Peminjam) *</Label>
             <Input
               placeholder="0x..."
               value={recipientAddress}
@@ -185,7 +185,7 @@ export function MintNFTForm() {
 
           {/* Collateral Type */}
           <div className="space-y-2">
-            <Label>Collateral Type *</Label>
+            <Label>Tipe Agunan *</Label>
             <Select
               value={collateralType}
               onValueChange={(value: any) => setCollateralType(value)}
@@ -195,18 +195,18 @@ export function MintNFTForm() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="LAND">Land</SelectItem>
-                <SelectItem value="HOUSE">House</SelectItem>
-                <SelectItem value="VEHICLE">Vehicle</SelectItem>
+                <SelectItem value="LAND">Tanah</SelectItem>
+                <SelectItem value="HOUSE">Rumah</SelectItem>
+                <SelectItem value="VEHICLE">Kendaraan</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           {/* Name */}
           <div className="space-y-2">
-            <Label>Name *</Label>
+            <Label>Nama *</Label>
             <Input
-              placeholder="e.g., Tanah Jakarta Selatan"
+              placeholder="contoh: Tanah Jakarta Selatan"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -216,9 +216,9 @@ export function MintNFTForm() {
 
           {/* Description */}
           <div className="space-y-2">
-            <Label>Description</Label>
+            <Label>Deskripsi</Label>
             <Textarea
-              placeholder="Brief description of the collateral"
+              placeholder="Deskripsi singkat agunan"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               disabled={step !== "form"}
@@ -227,11 +227,11 @@ export function MintNFTForm() {
 
           {/* Estimated Value */}
           <div className="space-y-2">
-            <Label>Estimated Value (ETH) *</Label>
+            <Label>Nilai Estimasi (ETH) *</Label>
             <Input
               type="number"
               step="0.01"
-              placeholder="e.g., 62.5"
+              placeholder="contoh: 62.5"
               value={estimatedValue}
               onChange={(e) => setEstimatedValue(e.target.value)}
               required
@@ -241,9 +241,9 @@ export function MintNFTForm() {
 
           {/* Location */}
           <div className="space-y-2">
-            <Label>Location</Label>
+            <Label>Lokasi</Label>
             <Input
-              placeholder="e.g., Jakarta Selatan, Indonesia"
+              placeholder="contoh: Jakarta Selatan, Indonesia"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               disabled={step !== "form"}
@@ -253,9 +253,9 @@ export function MintNFTForm() {
           {/* Area (for Land/House) */}
           {(collateralType === "LAND" || collateralType === "HOUSE") && (
             <div className="space-y-2">
-              <Label>Area</Label>
+              <Label>Luas</Label>
               <Input
-                placeholder="e.g., 500 m²"
+                placeholder="contoh: 500 m²"
                 value={area}
                 onChange={(e) => setArea(e.target.value)}
                 disabled={step !== "form"}
@@ -265,9 +265,9 @@ export function MintNFTForm() {
 
           {/* Certificate Number */}
           <div className="space-y-2">
-            <Label>Certificate Number</Label>
+            <Label>Nomor Sertifikat</Label>
             <Input
-              placeholder="e.g., SHM 12345"
+              placeholder="contoh: SHM 12345"
               value={certificateNumber}
               onChange={(e) => setCertificateNumber(e.target.value)}
               disabled={step !== "form"}
@@ -276,7 +276,7 @@ export function MintNFTForm() {
 
           {/* Image Upload */}
           <div className="space-y-2">
-            <Label>Collateral Image</Label>
+            <Label>Gambar Agunan</Label>
             <div className="border-2 border-dashed rounded-lg p-4">
               {imagePreview ? (
                 <div className="space-y-2">
@@ -295,13 +295,13 @@ export function MintNFTForm() {
                     }}
                     disabled={step !== "form"}
                   >
-                    Remove Image
+                    Hapus Gambar
                   </Button>
                 </div>
               ) : (
                 <div className="text-center">
                   <Upload className="w-8 h-8 mx-auto text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground mt-2">Click to upload image</p>
+                  <p className="text-sm text-muted-foreground mt-2">Klik untuk unggah gambar</p>
                   <Input
                     type="file"
                     accept="image/*"
@@ -330,20 +330,20 @@ export function MintNFTForm() {
             {step === "uploading" && (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Uploading to IPFS...
+                Mengunggah ke IPFS...
               </>
             )}
             {step === "minting" && (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {isPending ? "Confirm in Wallet..." : "Minting NFT..."}
+                {isPending ? "Konfirmasi di Dompet..." : "Minting NFT..."}
               </>
             )}
             {step === "form" && "Mint NFT"}
           </Button>
 
           <p className="text-xs text-muted-foreground">
-            * This will upload metadata to IPFS and mint an NFT to the recipient's wallet
+            * Ini akan mengunggah metadata ke IPFS dan mint NFT ke dompet penerima
           </p>
         </CardContent>
       </Card>

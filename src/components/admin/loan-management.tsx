@@ -57,13 +57,15 @@ function AcceptPartialFundingButton({ loan }: { loan: Loan }) {
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogTrigger asChild>
         <Button size="sm" variant="outline">
-          Accept Partial
+          Terima Pendanaan Parsial
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Accept Partial Funding</DialogTitle>
-          <DialogDescription>Activate this loan with the current funding amount</DialogDescription>
+          <DialogTitle>Terima Pendanaan Parsial</DialogTitle>
+          <DialogDescription>
+            Aktifkan pinjaman ini dengan jumlah pendanaan saat ini
+          </DialogDescription>
         </DialogHeader>
 
         {!isSuccess ? (
@@ -71,25 +73,25 @@ function AcceptPartialFundingButton({ loan }: { loan: Loan }) {
             <Alert>
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                This will recalculate loan terms based on actual funded amount and activate the
-                loan.
+                Ini akan menghitung ulang ketentuan pinjaman berdasarkan jumlah yang sebenarnya
+                didanai dan mengaktifkan pinjaman.
               </AlertDescription>
             </Alert>
 
             <div className="p-4 bg-muted rounded-lg space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Requested:</span>
+                <span className="text-muted-foreground">Diminta:</span>
                 <span className="font-medium">{formatWeiToEth(loan.principal)} ETH</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Actually Funded:</span>
+                <span className="text-muted-foreground">Terdanai Aktual:</span>
                 <span className="font-medium text-blue-600">
                   {formatWeiToEth(loan.totalFunded)} ETH ({fundingProgress.toFixed(1)}%)
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Will be adjusted:</span>
-                <span className="font-medium">Principal, Margin, Monthly Payment</span>
+                <span className="text-muted-foreground">Akan disesuaikan:</span>
+                <span className="font-medium">Pokok, Margin, Cicilan Bulanan</span>
               </div>
             </div>
 
@@ -106,7 +108,7 @@ function AcceptPartialFundingButton({ loan }: { loan: Loan }) {
                 disabled={isPending || isConfirming}
                 className="flex-1"
               >
-                Cancel
+                Batal
               </Button>
               <Button
                 onClick={handleAccept}
@@ -116,10 +118,10 @@ function AcceptPartialFundingButton({ loan }: { loan: Loan }) {
                 {isPending || isConfirming ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {isPending ? "Confirm..." : "Processing..."}
+                    {isPending ? "Konfirmasi..." : "Memproses..."}
                   </>
                 ) : (
-                  "Accept & Activate"
+                  "Terima & Aktifkan"
                 )}
               </Button>
             </div>
@@ -128,12 +130,12 @@ function AcceptPartialFundingButton({ loan }: { loan: Loan }) {
           <div className="py-8 text-center space-y-4">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
             <div>
-              <h3 className="text-lg font-semibold">Partial Funding Accepted!</h3>
+              <h3 className="text-lg font-semibold">Pendanaan Parsial Diterima!</h3>
               <p className="text-sm text-muted-foreground mt-2">
-                Loan is now active with adjusted terms
+                Pinjaman sekarang aktif dengan ketentuan yang disesuaikan
               </p>
             </div>
-            <Button onClick={() => handleClose(false)}>Close</Button>
+            <Button onClick={() => handleClose(false)}>Tutup</Button>
           </div>
         )}
       </DialogContent>
@@ -170,13 +172,15 @@ function CancelLoanButton({ loan }: { loan: Loan }) {
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogTrigger asChild>
         <Button size="sm" variant="destructive">
-          Cancel Loan
+          Batalkan Pinjaman
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Cancel Loan</DialogTitle>
-          <DialogDescription>Cancel this loan and enable refunds for lenders</DialogDescription>
+          <DialogTitle>Batalkan Pinjaman</DialogTitle>
+          <DialogDescription>
+            Batalkan pinjaman ini dan aktifkan pengembalian dana untuk pemberi pinjaman
+          </DialogDescription>
         </DialogHeader>
 
         {!isSuccess ? (
@@ -184,22 +188,22 @@ function CancelLoanButton({ loan }: { loan: Loan }) {
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                This action will cancel the loan, unlock the collateral, and allow lenders to claim
-                refunds. This cannot be undone.
+                Tindakan ini akan membatalkan pinjaman, membuka agunan, dan memungkinkan pemberi
+                pinjaman mengklaim pengembalian dana. Ini tidak dapat dibatalkan.
               </AlertDescription>
             </Alert>
 
             <div className="p-4 bg-muted rounded-lg space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Loan ID:</span>
+                <span className="text-muted-foreground">ID Pinjaman:</span>
                 <span className="font-medium">#{loan.loanId.toString()}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Total Funded:</span>
+                <span className="text-muted-foreground">Total Terdanai:</span>
                 <span className="font-medium">{formatWeiToEth(loan.totalFunded)} ETH</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Borrower:</span>
+                <span className="text-muted-foreground">Peminjam:</span>
                 <span className="font-medium">{formatAddress(loan.borrower)}</span>
               </div>
             </div>
@@ -217,7 +221,7 @@ function CancelLoanButton({ loan }: { loan: Loan }) {
                 disabled={isPending || isConfirming}
                 className="flex-1"
               >
-                No, Keep It
+                Tidak, Biarkan
               </Button>
               <Button
                 variant="destructive"
@@ -228,10 +232,10 @@ function CancelLoanButton({ loan }: { loan: Loan }) {
                 {isPending || isConfirming ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {isPending ? "Confirm..." : "Cancelling..."}
+                    {isPending ? "Konfirmasi..." : "Membatalkan..."}
                   </>
                 ) : (
-                  "Yes, Cancel Loan"
+                  "Ya, Batalkan Pinjaman"
                 )}
               </Button>
             </div>
@@ -240,12 +244,12 @@ function CancelLoanButton({ loan }: { loan: Loan }) {
           <div className="py-8 text-center space-y-4">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
             <div>
-              <h3 className="text-lg font-semibold">Loan Cancelled</h3>
+              <h3 className="text-lg font-semibold">Pinjaman Dibatalkan</h3>
               <p className="text-sm text-muted-foreground mt-2">
-                Lenders can now claim their refunds
+                Pemberi pinjaman sekarang dapat mengklaim pengembalian dana mereka
               </p>
             </div>
-            <Button onClick={() => handleClose(false)}>Close</Button>
+            <Button onClick={() => handleClose(false)}>Tutup</Button>
           </div>
         )}
       </DialogContent>
@@ -282,13 +286,15 @@ function MarkDefaultButton({ loan }: { loan: Loan }) {
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogTrigger asChild>
         <Button size="sm" variant="destructive">
-          Mark Default
+          Tandai Gagal Bayar
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Mark Loan as Defaulted</DialogTitle>
-          <DialogDescription>Mark this loan as defaulted due to missed payments</DialogDescription>
+          <DialogTitle>Tandai Pinjaman sebagai Gagal Bayar</DialogTitle>
+          <DialogDescription>
+            Tandai pinjaman ini sebagai gagal bayar karena pembayaran terlewat
+          </DialogDescription>
         </DialogHeader>
 
         {!isSuccess ? (
@@ -296,24 +302,24 @@ function MarkDefaultButton({ loan }: { loan: Loan }) {
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                This marks the loan as defaulted. Off-chain legal processes must be initiated to
-                recover collateral. This cannot be undone.
+                Ini menandai pinjaman sebagai gagal bayar. Proses hukum off-chain harus dimulai
+                untuk memulihkan agunan. Ini tidak dapat dibatalkan.
               </AlertDescription>
             </Alert>
 
             <div className="p-4 bg-muted rounded-lg space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Loan ID:</span>
+                <span className="text-muted-foreground">ID Pinjaman:</span>
                 <span className="font-medium">#{loan.loanId.toString()}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Paid / Total:</span>
+                <span className="text-muted-foreground">Dibayar / Total:</span>
                 <span className="font-medium">
                   {formatWeiToEth(loan.totalRepaid)} / {formatWeiToEth(loan.totalRepayment)} ETH
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Payments Remaining:</span>
+                <span className="text-muted-foreground">Cicilan Tersisa:</span>
                 <span className="font-medium text-red-600">
                   {loan.paymentsRemaining.toString()}
                 </span>
@@ -333,7 +339,7 @@ function MarkDefaultButton({ loan }: { loan: Loan }) {
                 disabled={isPending || isConfirming}
                 className="flex-1"
               >
-                Cancel
+                Batal
               </Button>
               <Button
                 variant="destructive"
@@ -344,10 +350,10 @@ function MarkDefaultButton({ loan }: { loan: Loan }) {
                 {isPending || isConfirming ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {isPending ? "Confirm..." : "Marking..."}
+                    {isPending ? "Konfirmasi..." : "Menandai..."}
                   </>
                 ) : (
-                  "Mark as Default"
+                  "Tandai sebagai Gagal Bayar"
                 )}
               </Button>
             </div>
@@ -356,12 +362,12 @@ function MarkDefaultButton({ loan }: { loan: Loan }) {
           <div className="py-8 text-center space-y-4">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
             <div>
-              <h3 className="text-lg font-semibold">Loan Marked as Defaulted</h3>
+              <h3 className="text-lg font-semibold">Pinjaman Ditandai sebagai Gagal Bayar</h3>
               <p className="text-sm text-muted-foreground mt-2">
-                Proceed with off-chain collateral recovery
+                Lanjutkan dengan pemulihan agunan off-chain
               </p>
             </div>
-            <Button onClick={() => handleClose(false)}>Close</Button>
+            <Button onClick={() => handleClose(false)}>Tutup</Button>
           </div>
         )}
       </DialogContent>
@@ -384,9 +390,9 @@ function LoanRow({ loan }: { loan: Loan }) {
       <CardHeader>
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-lg font-semibold">Loan #{loan.loanId.toString()}</h3>
+            <h3 className="text-lg font-semibold">Pinjaman #{loan.loanId.toString()}</h3>
             <p className="text-sm text-muted-foreground">
-              Borrower: {formatAddress(loan.borrower)}
+              Peminjam: {formatAddress(loan.borrower)}
             </p>
           </div>
           <Badge className={getLoanStatusColor(loan.status)}>
@@ -397,29 +403,29 @@ function LoanRow({ loan }: { loan: Loan }) {
       <CardContent className="space-y-4">
         <div className="grid grid-cols-3 gap-4 text-sm">
           <div>
-            <p className="text-muted-foreground">Principal</p>
+            <p className="text-muted-foreground">Pokok Pinjaman</p>
             <p className="font-medium">{formatWeiToEth(loan.principal)} ETH</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Funded</p>
+            <p className="text-muted-foreground">Terdanai</p>
             <p className="font-medium">
               {formatWeiToEth(loan.totalFunded)} ETH ({fundingProgress.toFixed(0)}%)
             </p>
           </div>
           <div>
-            <p className="text-muted-foreground">Duration</p>
-            <p className="font-medium">{loan.duration.toString()} months</p>
+            <p className="text-muted-foreground">Durasi</p>
+            <p className="font-medium">{loan.duration.toString()} bulan</p>
           </div>
         </div>
 
         {isActive && (
           <div className="grid grid-cols-2 gap-4 text-sm pt-2 border-t">
             <div>
-              <p className="text-muted-foreground">Paid</p>
+              <p className="text-muted-foreground">Dibayar</p>
               <p className="font-medium">{formatWeiToEth(loan.totalRepaid)} ETH</p>
             </div>
             <div>
-              <p className="text-muted-foreground">Remaining Payments</p>
+              <p className="text-muted-foreground">Cicilan Tersisa</p>
               <p className="font-medium">{loan.paymentsRemaining.toString()}</p>
             </div>
           </div>
@@ -430,7 +436,7 @@ function LoanRow({ loan }: { loan: Loan }) {
           {isPending && <CancelLoanButton loan={loan} />}
           {isActive && <MarkDefaultButton loan={loan} />}
           {(isCompleted || isDefaulted || isCancelled) && (
-            <p className="text-sm text-muted-foreground">No actions available</p>
+            <p className="text-sm text-muted-foreground">Tidak ada aksi tersedia</p>
           )}
         </div>
       </CardContent>
@@ -449,9 +455,11 @@ export function LoanManagement() {
     <div className="space-y-6">
       {/* Pending Loans */}
       <div>
-        <h2 className="text-xl font-semibold mb-4">Pending Loans ({pendingLoans.length})</h2>
+        <h2 className="text-xl font-semibold mb-4">
+          Pinjaman Terbuka untuk Pendanaan ({pendingLoans.length})
+        </h2>
         {isLoading ? (
-          <p className="text-muted-foreground">Loading...</p>
+          <p className="text-muted-foreground">Memuat...</p>
         ) : pendingLoans.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {pendingLoans.map((loan) => (
@@ -459,15 +467,17 @@ export function LoanManagement() {
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">No pending loans</p>
+          <p className="text-sm text-muted-foreground">
+            Tidak ada pinjaman yang terbuka untuk pendanaan
+          </p>
         )}
       </div>
 
       {/* Active Loans */}
       <div>
-        <h2 className="text-xl font-semibold mb-4">Active Loans ({activeLoans.length})</h2>
+        <h2 className="text-xl font-semibold mb-4">Pinjaman Aktif ({activeLoans.length})</h2>
         {isLoading ? (
-          <p className="text-muted-foreground">Loading...</p>
+          <p className="text-muted-foreground">Memuat...</p>
         ) : activeLoans.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {activeLoans.map((loan) => (
@@ -475,7 +485,7 @@ export function LoanManagement() {
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">No active loans</p>
+          <p className="text-sm text-muted-foreground">Tidak ada pinjaman aktif</p>
         )}
       </div>
 
@@ -483,7 +493,7 @@ export function LoanManagement() {
       {otherLoans.length > 0 && (
         <div>
           <h2 className="text-xl font-semibold mb-4">
-            Completed/Cancelled/Defaulted ({otherLoans.length})
+            Selesai/Dibatalkan/Gagal Bayar ({otherLoans.length})
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {otherLoans.map((loan) => (

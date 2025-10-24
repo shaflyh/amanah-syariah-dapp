@@ -17,11 +17,11 @@ export function CollateralCard({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Collateral</CardTitle>
+        <CardTitle>Agunan</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {isLoading ? (
-          <p className="text-sm text-muted-foreground">Loading collateral...</p>
+          <p className="text-sm text-muted-foreground">Memuat agunan...</p>
         ) : (
           <>
             {/* NFT ID */}
@@ -34,7 +34,7 @@ export function CollateralCard({
             <div>
               <p className="text-sm text-muted-foreground">Status</p>
               <Badge variant={collateral?.locked ? "destructive" : "secondary"}>
-                {collateral?.locked ? "Locked" : "Unlocked"}
+                {collateral?.locked ? "Terkunci" : "Terbuka"}
               </Badge>
             </div>
 
@@ -61,29 +61,29 @@ export function CollateralCard({
                 {/* Attributes */}
                 <div className="space-y-2">
                   <div>
-                    <p className="text-sm text-muted-foreground">Type</p>
+                    <p className="text-sm text-muted-foreground">Tipe</p>
                     <p className="font-medium">{metadata.attributes.type}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">Estimated Value</p>
+                    <p className="text-sm text-muted-foreground">Nilai Estimasi</p>
                     <p className="font-medium">{metadata.attributes.estimatedValue}</p>
                   </div>
                   {metadata.attributes.location && (
                     <div>
-                      <p className="text-sm text-muted-foreground">Location</p>
+                      <p className="text-sm text-muted-foreground">Lokasi</p>
                       <p className="font-medium">{metadata.attributes.location}</p>
                     </div>
                   )}
                   {metadata.attributes.area && (
                     <div>
-                      <p className="text-sm text-muted-foreground">Area</p>
+                      <p className="text-sm text-muted-foreground">Luas</p>
                       <p className="font-medium">{metadata.attributes.area}</p>
                     </div>
                   )}
                 </div>
               </>
             ) : (
-              <p className="text-sm text-muted-foreground">Metadata not available</p>
+              <p className="text-sm text-muted-foreground">Metadata tidak tersedia</p>
             )}
 
             {/* View on Etherscan */}
@@ -93,7 +93,7 @@ export function CollateralCard({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                View on Etherscan
+                Lihat di Etherscan
               </a>
             </Button>
           </>

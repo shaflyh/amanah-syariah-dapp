@@ -77,18 +77,18 @@ export function MakePaymentButton({
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogTrigger asChild>
-        <Button size="sm">Pay Now</Button>
+        <Button size="sm">Bayar Sekarang</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            Make Payment #{paymentNumber}
-            {isFinalPayment && " (Final Payment!)"}
+            Bayar Cicilan #{paymentNumber}
+            {isFinalPayment && " (Cicilan Terakhir!)"}
           </DialogTitle>
           <DialogDescription>
             {isFinalPayment
-              ? "This is your final payment. Your collateral will be unlocked after confirmation."
-              : "Make your monthly payment to keep your loan in good standing."}
+              ? "Ini adalah cicilan terakhir Anda. Agunan Anda akan dibuka setelah konfirmasi."
+              : "Bayar cicilan bulanan Anda untuk menjaga pinjaman tetap lancar."}
           </DialogDescription>
         </DialogHeader>
 
@@ -97,21 +97,21 @@ export function MakePaymentButton({
             {/* Payment Info */}
             <div className="p-4 bg-muted rounded-lg space-y-3">
               <div className="flex justify-between">
-                <span className="text-sm text-muted-foreground">Payment Amount:</span>
+                <span className="text-sm text-muted-foreground">Jumlah Cicilan:</span>
                 <span className="text-xl font-bold">{formatWeiToEth(loan.monthlyPayment)} ETH</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Payment Number:</span>
+                <span className="text-muted-foreground">Cicilan Ke:</span>
                 <span className="font-medium">
-                  {paymentNumber} of {loan.duration.toString()}
+                  {paymentNumber} dari {loan.duration.toString()}
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Total Paid So Far:</span>
+                <span className="text-muted-foreground">Total Sudah Dibayar:</span>
                 <span className="font-medium">{formatWeiToEth(loan.totalRepaid)} ETH</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Remaining After This:</span>
+                <span className="text-muted-foreground">Sisa Setelah Ini:</span>
                 <span className="font-medium">
                   {formatWeiToEth(loan.totalRepayment - loan.totalRepaid - loan.monthlyPayment)} ETH
                 </span>
@@ -122,8 +122,8 @@ export function MakePaymentButton({
             <Alert>
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                Payment will be automatically distributed to all lenders proportionally.
-                {isFinalPayment && " Your collateral NFT will be unlocked immediately."}
+                Pembayaran akan otomatis didistribusikan ke semua pemberi pinjaman secara proporsional.
+                {isFinalPayment && " NFT agunan Anda akan dibuka segera."}
               </AlertDescription>
             </Alert>
 
@@ -132,7 +132,7 @@ export function MakePaymentButton({
               <Alert variant="destructive">
                 <AlertDescription>
                   {error.message.includes("insufficient")
-                    ? "Insufficient ETH balance"
+                    ? "Saldo ETH tidak mencukupi"
                     : error.message}
                 </AlertDescription>
               </Alert>
@@ -146,7 +146,7 @@ export function MakePaymentButton({
                 disabled={isPending || isConfirming}
                 className="flex-1"
               >
-                Cancel
+                Batal
               </Button>
               <Button
                 onClick={handlePayment}
@@ -156,10 +156,10 @@ export function MakePaymentButton({
                 {isPending || isConfirming ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {isPending ? "Confirm in Wallet..." : "Processing..."}
+                    {isPending ? "Konfirmasi di Dompet..." : "Memproses..."}
                   </>
                 ) : (
-                  `Pay ${formatWeiToEth(loan.monthlyPayment)} ETH`
+                  `Bayar ${formatWeiToEth(loan.monthlyPayment)} ETH`
                 )}
               </Button>
             </div>
@@ -169,12 +169,12 @@ export function MakePaymentButton({
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
             <div>
               <h3 className="text-lg font-semibold">
-                Payment Successful! {isFinalPayment && "🎉"}
+                Pembayaran Berhasil! {isFinalPayment && "🎉"}
               </h3>
               <p className="text-sm text-muted-foreground mt-2">
                 {isFinalPayment
-                  ? "Congratulations! Your loan is now complete and your collateral is unlocked."
-                  : "Your payment has been distributed to all lenders."}
+                  ? "Selamat! Pinjaman Anda sekarang selesai dan agunan Anda telah dibuka."
+                  : "Pembayaran Anda telah didistribusikan ke semua pemberi pinjaman."}
               </p>
             </div>
             <a
@@ -183,10 +183,10 @@ export function MakePaymentButton({
               rel="noopener noreferrer"
               className="text-sm text-blue-500 hover:underline block"
             >
-              View on Etherscan
+              Lihat di Etherscan
             </a>
             <Button onClick={() => handleClose(false)} className="mt-4">
-              Close
+              Tutup
             </Button>
           </div>
         )}

@@ -16,7 +16,7 @@ export function PaymentSchedule({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Payment Schedule</CardTitle>
+        <CardTitle>Jadwal Pembayaran</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-2">
@@ -47,9 +47,9 @@ export function PaymentSchedule({
                   </div>
                   <div>
                     <p className="font-medium">
-                      Payment #{paymentNum}
+                      Cicilan #{paymentNum}
                       {isNextPayment && !isPaid && (
-                        <span className="text-xs text-blue-600 ml-2">(Next Due)</span>
+                        <span className="text-xs text-blue-600 ml-2">(Jatuh Tempo Berikutnya)</span>
                       )}
                     </p>
                     <p className="text-sm text-muted-foreground">
@@ -59,7 +59,7 @@ export function PaymentSchedule({
                 </div>
                 <div className="flex items-center gap-2">
                   {isPaid ? (
-                    <Badge variant="default">Paid ✓</Badge>
+                    <Badge variant="default">Lunas ✓</Badge>
                   ) : isNextPayment ? (
                     <MakePaymentButton
                       loan={loan}
@@ -68,7 +68,7 @@ export function PaymentSchedule({
                       onSuccess={onPaymentSuccess}
                     />
                   ) : (
-                    <Badge variant="secondary">Pending</Badge>
+                    <Badge variant="secondary">Belum Dibayar</Badge>
                   )}
                 </div>
               </div>
@@ -79,17 +79,17 @@ export function PaymentSchedule({
         {/* Summary */}
         <div className="mt-4 pt-4 border-t space-y-2 text-sm">
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Total Paid:</span>
+            <span className="text-muted-foreground">Total Sudah Dibayar:</span>
             <span className="font-medium">{formatWeiToEth(loan.totalRepaid)} ETH</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Remaining:</span>
+            <span className="text-muted-foreground">Sisa:</span>
             <span className="font-medium">
               {formatWeiToEth(loan.totalRepayment - loan.totalRepaid)} ETH
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Payments Left:</span>
+            <span className="text-muted-foreground">Cicilan Tersisa:</span>
             <span className="font-medium">{loan.paymentsRemaining.toString()}</span>
           </div>
         </div>
