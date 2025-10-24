@@ -452,50 +452,69 @@ export function LoanManagement() {
   const otherLoans = loans.filter((loan) => loan.status > 1);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Pending Loans */}
       <div>
-        <h2 className="text-xl font-semibold mb-4">
-          Pinjaman Terbuka untuk Pendanaan ({pendingLoans.length})
-        </h2>
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-2xl font-bold">Pinjaman Terbuka untuk Pendanaan</h2>
+          <Badge variant="secondary" className="text-base px-3 py-1">
+            {pendingLoans.length}
+          </Badge>
+        </div>
         {isLoading ? (
           <p className="text-muted-foreground">Memuat...</p>
         ) : pendingLoans.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4">
             {pendingLoans.map((loan) => (
               <LoanRow key={loan.loanId.toString()} loan={loan} />
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">
-            Tidak ada pinjaman yang terbuka untuk pendanaan
-          </p>
+          <Card className="border-dashed">
+            <CardContent className="py-8 text-center">
+              <p className="text-muted-foreground">
+                Tidak ada pinjaman yang terbuka untuk pendanaan
+              </p>
+            </CardContent>
+          </Card>
         )}
       </div>
 
       {/* Active Loans */}
       <div>
-        <h2 className="text-xl font-semibold mb-4">Pinjaman Aktif ({activeLoans.length})</h2>
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-2xl font-bold">Pinjaman Aktif</h2>
+          <Badge variant="secondary" className="text-base px-3 py-1">
+            {activeLoans.length}
+          </Badge>
+        </div>
         {isLoading ? (
           <p className="text-muted-foreground">Memuat...</p>
         ) : activeLoans.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {activeLoans.map((loan) => (
               <LoanRow key={loan.loanId.toString()} loan={loan} />
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">Tidak ada pinjaman aktif</p>
+          <Card className="border-dashed">
+            <CardContent className="py-8 text-center">
+              <p className="text-muted-foreground">Tidak ada pinjaman aktif</p>
+            </CardContent>
+          </Card>
         )}
       </div>
 
       {/* Other Loans */}
       {otherLoans.length > 0 && (
         <div>
-          <h2 className="text-xl font-semibold mb-4">
-            Selesai/Dibatalkan/Gagal Bayar ({otherLoans.length})
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-2xl font-bold">Selesai / Dibatalkan / Gagal Bayar</h2>
+            <Badge variant="secondary" className="text-base px-3 py-1">
+              {otherLoans.length}
+            </Badge>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {otherLoans.map((loan) => (
               <LoanRow key={loan.loanId.toString()} loan={loan} />
             ))}

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CONTRACTS } from "@/lib/contracts";
-import { Loader2, Upload, CheckCircle2 } from "lucide-react";
+import { Loader2, Upload, CheckCircle2, X } from "lucide-react";
 import { CollateralMetadata } from "@/types";
 
 export function MintNFTForm() {
@@ -168,183 +168,222 @@ export function MintNFTForm() {
     <form onSubmit={handleSubmit}>
       <Card>
         <CardHeader>
-          <CardTitle>Mint NFT Agunan</CardTitle>
+          <CardTitle className="text-2xl">Mint NFT Agunan</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {/* Recipient Address */}
-          <div className="space-y-2">
-            <Label>Alamat Penerima (Dompet Peminjam) *</Label>
-            <Input
-              placeholder="0x..."
-              value={recipientAddress}
-              onChange={(e) => setRecipientAddress(e.target.value)}
-              required
-              disabled={step !== "form"}
-            />
-          </div>
+        <CardContent>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Left Column - Basic Information */}
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+                  Informasi Dasar
+                </h3>
+              </div>
 
-          {/* Collateral Type */}
-          <div className="space-y-2">
-            <Label>Tipe Agunan *</Label>
-            <Select
-              value={collateralType}
-              onValueChange={(value: any) => setCollateralType(value)}
-              disabled={step !== "form"}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="LAND">Tanah</SelectItem>
-                <SelectItem value="HOUSE">Rumah</SelectItem>
-                <SelectItem value="VEHICLE">Kendaraan</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+              {/* Recipient Address */}
+              <div className="space-y-2">
+                <Label>Alamat Penerima (Dompet Peminjam) *</Label>
+                <Input
+                  placeholder="0x..."
+                  value={recipientAddress}
+                  onChange={(e) => setRecipientAddress(e.target.value)}
+                  required
+                  disabled={step !== "form"}
+                />
+              </div>
 
-          {/* Name */}
-          <div className="space-y-2">
-            <Label>Nama *</Label>
-            <Input
-              placeholder="contoh: Tanah Jakarta Selatan"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              disabled={step !== "form"}
-            />
-          </div>
+              {/* Collateral Type */}
+              <div className="space-y-2">
+                <Label>Tipe Agunan *</Label>
+                <Select
+                  value={collateralType}
+                  onValueChange={(value: any) => setCollateralType(value)}
+                  disabled={step !== "form"}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="LAND">Tanah</SelectItem>
+                    <SelectItem value="HOUSE">Rumah</SelectItem>
+                    <SelectItem value="VEHICLE">Kendaraan</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Description */}
-          <div className="space-y-2">
-            <Label>Deskripsi</Label>
-            <Textarea
-              placeholder="Deskripsi singkat agunan"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              disabled={step !== "form"}
-            />
-          </div>
+              {/* Name */}
+              <div className="space-y-2">
+                <Label>Nama *</Label>
+                <Input
+                  placeholder="contoh: Tanah Jakarta Selatan"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  disabled={step !== "form"}
+                />
+              </div>
 
-          {/* Estimated Value */}
-          <div className="space-y-2">
-            <Label>Nilai Estimasi (ETH) *</Label>
-            <Input
-              type="number"
-              step="0.01"
-              placeholder="contoh: 62.5"
-              value={estimatedValue}
-              onChange={(e) => setEstimatedValue(e.target.value)}
-              required
-              disabled={step !== "form"}
-            />
-          </div>
-
-          {/* Location */}
-          <div className="space-y-2">
-            <Label>Lokasi</Label>
-            <Input
-              placeholder="contoh: Jakarta Selatan, Indonesia"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              disabled={step !== "form"}
-            />
-          </div>
-
-          {/* Area (for Land/House) */}
-          {(collateralType === "LAND" || collateralType === "HOUSE") && (
-            <div className="space-y-2">
-              <Label>Luas</Label>
-              <Input
-                placeholder="contoh: 500 m²"
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                disabled={step !== "form"}
-              />
+              {/* Description */}
+              <div className="space-y-2">
+                <Label>Deskripsi</Label>
+                <Textarea
+                  placeholder="Deskripsi singkat agunan"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  disabled={step !== "form"}
+                  rows={4}
+                />
+              </div>
             </div>
-          )}
 
-          {/* Certificate Number */}
-          <div className="space-y-2">
-            <Label>Nomor Sertifikat</Label>
-            <Input
-              placeholder="contoh: SHM 12345"
-              value={certificateNumber}
-              onChange={(e) => setCertificateNumber(e.target.value)}
-              disabled={step !== "form"}
-            />
-          </div>
+            {/* Right Column - Details & Valuation */}
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+                  Detail & Penilaian
+                </h3>
+              </div>
 
-          {/* Image Upload */}
-          <div className="space-y-2">
-            <Label>Gambar Agunan</Label>
-            <div className="border-2 border-dashed rounded-lg p-4">
-              {imagePreview ? (
+              {/* Estimated Value */}
+              <div className="space-y-2">
+                <Label>Nilai Estimasi (ETH) *</Label>
+                <Input
+                  type="number"
+                  step="0.01"
+                  placeholder="contoh: 62.5"
+                  value={estimatedValue}
+                  onChange={(e) => setEstimatedValue(e.target.value)}
+                  required
+                  disabled={step !== "form"}
+                />
+              </div>
+
+              {/* Location */}
+              <div className="space-y-2">
+                <Label>Lokasi</Label>
+                <Input
+                  placeholder="contoh: Jakarta Selatan, Indonesia"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  disabled={step !== "form"}
+                />
+              </div>
+
+              {/* Area (for Land/House) */}
+              {(collateralType === "LAND" || collateralType === "HOUSE") && (
                 <div className="space-y-2">
+                  <Label>Luas</Label>
+                  <Input
+                    placeholder="contoh: 500 m²"
+                    value={area}
+                    onChange={(e) => setArea(e.target.value)}
+                    disabled={step !== "form"}
+                  />
+                </div>
+              )}
+
+              {/* Certificate Number */}
+              <div className="space-y-2">
+                <Label>Nomor Sertifikat</Label>
+                <Input
+                  placeholder="contoh: SHM 12345"
+                  value={certificateNumber}
+                  onChange={(e) => setCertificateNumber(e.target.value)}
+                  disabled={step !== "form"}
+                />
+              </div>
+            </div>
+
+            {/* Full Width - Image Upload */}
+            <div className="lg:col-span-2 space-y-2">
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+                  Gambar Agunan
+                </h3>
+              </div>
+              {imagePreview ? (
+                <div className="relative group">
                   <img
                     src={imagePreview}
-                    alt="Preview"
-                    className="w-full h-48 object-cover rounded"
+                    alt="Pratinjau agunan"
+                    className="w-full h-80 object-cover rounded-lg border"
                   />
                   <Button
                     type="button"
-                    variant="outline"
-                    size="sm"
+                    variant="destructive"
+                    size="icon"
+                    className="absolute top-2 right-2 rounded-full h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
                     onClick={() => {
                       setImageFile(null);
                       setImagePreview("");
                     }}
                     disabled={step !== "form"}
                   >
-                    Hapus Gambar
+                    <X className="w-4 h-4" />
                   </Button>
                 </div>
               ) : (
-                <div className="text-center">
-                  <Upload className="w-8 h-8 mx-auto text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground mt-2">Klik untuk unggah gambar</p>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="mt-2"
-                    disabled={step !== "form"}
-                  />
+                <div className="flex items-center justify-center w-full">
+                  <label
+                    htmlFor="dropzone-file"
+                    className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer bg-muted hover:bg-muted/80 transition-colors"
+                  >
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                      <Upload className="w-10 h-10 mb-4 text-muted-foreground" />
+                      <p className="mb-2 text-sm text-muted-foreground">
+                        <span className="font-semibold">Klik untuk unggah</span> atau seret dan lepas
+                      </p>
+                      <p className="text-xs text-muted-foreground">PNG, JPG, atau GIF (Maks 10MB)</p>
+                    </div>
+                    <Input
+                      id="dropzone-file"
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      disabled={step !== "form"}
+                    />
+                  </label>
                 </div>
               )}
             </div>
+
+            {/* Error Display */}
+            {error && (
+              <div className="lg:col-span-2">
+                <Alert variant="destructive">
+                  <AlertDescription>{error.message}</AlertDescription>
+                </Alert>
+              </div>
+            )}
+
+            {/* Submit Button */}
+            <div className="lg:col-span-2 space-y-3">
+              <Button
+                type="submit"
+                className="w-full h-12 text-base"
+                disabled={step !== "form" || !recipientAddress || !name || !estimatedValue}
+              >
+                {step === "uploading" && (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Mengunggah ke IPFS...
+                  </>
+                )}
+                {step === "minting" && (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    {isPending ? "Konfirmasi di Dompet..." : "Minting NFT..."}
+                  </>
+                )}
+                {step === "form" && "Mint NFT Agunan"}
+              </Button>
+
+              <p className="text-xs text-muted-foreground text-center">
+                * Ini akan mengunggah metadata ke IPFS dan mint NFT ke dompet penerima
+              </p>
+            </div>
           </div>
-
-          {/* Error Display */}
-          {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error.message}</AlertDescription>
-            </Alert>
-          )}
-
-          {/* Submit Button */}
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={step !== "form" || !recipientAddress || !name || !estimatedValue}
-          >
-            {step === "uploading" && (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Mengunggah ke IPFS...
-              </>
-            )}
-            {step === "minting" && (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {isPending ? "Konfirmasi di Dompet..." : "Minting NFT..."}
-              </>
-            )}
-            {step === "form" && "Mint NFT"}
-          </Button>
-
-          <p className="text-xs text-muted-foreground">
-            * Ini akan mengunggah metadata ke IPFS dan mint NFT ke dompet penerima
-          </p>
         </CardContent>
       </Card>
     </form>
